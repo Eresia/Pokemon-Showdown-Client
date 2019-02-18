@@ -699,6 +699,7 @@
 			};
 			this.socket.onmessage = function (msg) {
 				if (window.console && console.log) {
+					AIInterface.sendData(msg.data);
 					console.log('<< ' + msg.data);
 				}
 				self.receive(msg.data);
@@ -778,6 +779,7 @@
 				var nlIndex = data.indexOf('\n');
 				if (nlIndex < 0) return;
 				roomid = toRoomid(data.substr(1, nlIndex - 1));
+				AIInterface.setRoomID(roomid);
 				data = data.substr(nlIndex + 1);
 			}
 			if (data.substr(0, 6) === '|init|') {
